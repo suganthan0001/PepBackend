@@ -1,0 +1,13 @@
+body{
+    font-family: 'roboto';
+}
+
+.Addmovie{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+#outlined-basic{
+    width: 400px;
+}
