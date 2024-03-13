@@ -33,6 +33,7 @@ function Login() {
         onBlur={formik.handleBlur}
         error={formik.touched.email && formik.errors.email}
         helperText={formik.touched.email && formik.errors.email ? formik.errors.email : null}
+        className="input-field"
       />
       <TextField
         id="password"
@@ -44,6 +45,7 @@ function Login() {
         error={formik.touched.password && formik.errors.password}
         helperText={formik.touched.password && formik.errors.password ? formik.errors.password : null}
         type="password"
+        className="input-field"
       />
       <Button variant="contained" type="submit">
         LOGIN

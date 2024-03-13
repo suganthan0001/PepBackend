@@ -2,9 +2,16 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 import * as yup from "yup";
 
 function Register() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClickVariant = (variant) => () => {
+    enqueueSnackbar("This is a success message!", { variant });
+  };
+
   const registerValidationSchema = yup.object({
     username: yup.string().required(),
     email: yup.string().email().required(),
@@ -25,7 +32,7 @@ function Register() {
     validationSchema: registerValidationSchema,
     onSubmit: (values) => {
       console.log(values);
-      // Add form submission logic here
+      handleClickVariant("success")();
     },
   });
 
@@ -40,7 +47,12 @@ function Register() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.username && formik.errors.username}
-        helperText={formik.touched.username && formik.errors.username ? formik.errors.username : null}
+        helperText={
+          formik.touched.username && formik.errors.username
+            ? formik.errors.username
+            : null
+        }
+        className="input-field"
       />
       <TextField
         id="email"
@@ -50,7 +62,12 @@ function Register() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.email && formik.errors.email}
-        helperText={formik.touched.email && formik.errors.email ? formik.errors.email : null}
+        helperText={
+          formik.touched.email && formik.errors.email
+            ? formik.errors.email
+            : null
+        }
+        className="input-field"
       />
       <TextField
         id="password"
@@ -61,7 +78,12 @@ function Register() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.password && formik.errors.password}
-        helperText={formik.touched.password && formik.errors.password ? formik.errors.password : null}
+        helperText={
+          formik.touched.password && formik.errors.password
+            ? formik.errors.password
+            : null
+        }
+        className="input-field"
       />
       <TextField
         id="confirmPassword"
@@ -72,7 +94,12 @@ function Register() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.confirmPassword && formik.errors.confirmPassword}
-        helperText={formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : null}
+        helperText={
+          formik.touched.confirmPassword && formik.errors.confirmPassword
+            ? formik.errors.confirmPassword
+            : null
+        }
+        className="input-field"
       />
       <Button variant="contained" type="submit">
         Register

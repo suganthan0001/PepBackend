@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
+import Movie from "./Movie";
+import Topbar from "./Topbar";
 
 function Home() {
   return (
-    <div>
-        <h1>
-            To Add - /add
-        </h1>
-        <h1>
-        To Register - /register
-        </h1>
-    </div>
-  )
+    <>
+      <Topbar />
+      <div className="home">
+        <Movie />
+      </div>
+    </>
+  );
 }
 
-export default Home
+export default Home;
