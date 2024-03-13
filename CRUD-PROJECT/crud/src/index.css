@@ -28,12 +28,6 @@ body{
     text-align: center;
 }
 
-.home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .movie-card{
     display: flex;
     flex-direction: column;
@@ -57,8 +51,9 @@ body{
 }
 
 .movie-rating{
-    display: flex;
-    align-items: center;
+    font-size: 20px;
+    display: inline-flex;
+    margin-left: auto;
 }
 .movie-img{
     width: 300px;
@@ -79,4 +74,21 @@ body{
 }
 .likeDislike{
     margin-left: auto;
+}
+
+.movies{
+    padding: 2%;
+    /* display: grid;
+    grid-template-columns: repeat(5,1fr);
+    row-gap: 2% !important; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 10px 0 10px;
+    gap: 4px;
+}
+
+.movie-name{
+    display: flex;
+    align-items: center;
 }

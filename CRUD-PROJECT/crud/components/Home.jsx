@@ -1,14 +1,12 @@
 import React from "react";
-import Movie from "./Movie";
 import Topbar from "./Topbar";
+import MoviesGrid from "./MoviesGrid";
 
 function Home() {
   return (
     <>
       <Topbar />
-      <div className="home">
-        <Movie />
-      </div>
+      <MoviesGrid />
     </>
   );
 }
