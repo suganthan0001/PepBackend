@@ -2,11 +2,11 @@ import React from "react";
 import Topbar from "./Topbar";
 import MoviesGrid from "./MoviesGrid";
 
-function Home() {
+function Home({mode,setMode}) {
   return (
     <>
-      <Topbar />
-      <MoviesGrid />
+      <Topbar mode={mode} setMode={setMode}/>
+      HOME
     </>
   );
 }

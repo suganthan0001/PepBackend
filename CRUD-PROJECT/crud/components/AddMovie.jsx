@@ -4,8 +4,9 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import { useNavigate } from "react-router-dom";
 function AddMovie() {
+  const navigate = useNavigate();
   const movieValidateSchema = yup.object({
     name: yup.string().required(),
     poster: yup.string().required().min(10).url(),
@@ -13,7 +14,8 @@ function AddMovie() {
     rating: yup.number().required().min(0).max(10),
     summary: yup.string().required().min(20),
   });
-
+  
+  
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -23,10 +25,29 @@ function AddMovie() {
       summary: "",
     },
     validationSchema: movieValidateSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (newMovie) => {
+      addMovie(newMovie);
     },
   });
+  
+  async function addMovie(newMovie){
+    try{
+      const res = await fetch("https://65f16ba2034bdbecc762729a.mockapi.io/movie", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newMovie),
+      });
+      const response = await res.json();
+      console.log(response);
+      alert('movie added'); 
+      navigate('/portal/movies');
+    }catch(e){
+      console.log(e)
+    }
+  }
+
 
   return (
     <form className="Addmovie addForm" onSubmit={formik.handleSubmit}>

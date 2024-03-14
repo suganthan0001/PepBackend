@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 // import { CardActionArea } from '@mui/material';
 
 function Movie({name, summary, poster}) {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     // <Card className="movie-card">
@@ -53,7 +53,7 @@ function Movie({name, summary, poster}) {
     //   </CardActions>
     // </Card>
 
-    <Card sx={{ width: 300 }}>
+    <Card sx={{ width: 300 ,marginBottom: "50px"}}>
       {/* <CardActionArea> */}
       <CardMedia sx={{ height: 300 ,borderRadius:"10px"}} image={poster} title="green iguana" />
       <CardContent>
