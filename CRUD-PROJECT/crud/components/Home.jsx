@@ -6,7 +6,7 @@ function Home({mode,setMode}) {
   return (
     <>
       <Topbar mode={mode} setMode={setMode}/>
-      HOME
+      <h1 style={{textAlign:"center"}}>HOME</h1>
     </>
   );
 }
