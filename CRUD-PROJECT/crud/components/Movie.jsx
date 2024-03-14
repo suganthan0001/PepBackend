@@ -12,9 +12,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
 // import { CardActionArea } from '@mui/material';
-
-function Movie({name, summary, poster}) {
+function Movie({response}) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   return (
@@ -54,12 +56,11 @@ function Movie({name, summary, poster}) {
     // </Card>
 
     <Card sx={{ width: 300 ,marginBottom: "50px"}}>
-      {/* <CardActionArea> */}
-      <CardMedia sx={{ height: 300 ,borderRadius:"10px"}} image={poster} title="green iguana" />
+      <CardMedia sx={{ height: 300 ,borderRadius:"10px"}} image={response.poster} title="green iguana" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           <h4 className="movie-name">
-            {name}
+            {response.name}
             <IconButton
               aria-label="Toggle-Description"
               className="dropdown-icon"
@@ -69,26 +70,28 @@ function Movie({name, summary, poster}) {
               {show && <KeyboardArrowUpIcon />}
             </IconButton>
             <IconButton>
-              <InfoIcon className="info-icon" />
+              <InfoIcon className="info-icon" onClick={() => navigate(`/portal/view/${response.id}`)}/>
             </IconButton>
             <span className="movie-rating">
                 <StarRoundedIcon />
-                <p style={{ display: "inline-block" }}>7.3</p>
+                <p style={{ display: "inline-block" }}>{response.rating}</p>
             </span>
           </h4>
         </Typography>
         <Typography variant="body2" color="text.secondary" >
           {show && (
             <p className="movie-summary">
-              {summary}
+              {response.summary}
             </p>
           )}
         </Typography>
       </CardContent>
       <CardActions style={{position:"relative"}}>
         <LikeDislike />
+        <IconButton>
+              <EditIcon onClick={() => navigate(`/portal/edit/${response.id}`)}/>
+        </IconButton>
       </CardActions>
-      {/* </CardActionArea> */}
     </Card>
   );
 }

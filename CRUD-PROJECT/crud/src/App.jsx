@@ -10,10 +10,12 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
 import MoviesGrid from "../components/MoviesGrid";
+import MovieDetail from "../components/MovieDetail";
+import EditMovie from "../components/EditMovie";
 
 function App() {
 
-  const [mode,setMode] = useState(false);
+  const [mode,setMode] = useState(true);
 
   const darkTheme = createTheme({
     palette: {
@@ -31,6 +33,8 @@ function App() {
           <Route path="add" element={<AddMovie />} />
           <Route path="login" element={<Login />} />
           <Route path="movies" element={<MoviesGrid />} />
+          <Route path="view/:id" element={<MovieDetail />} />
+          <Route path="edit/:id" element={<EditMovie />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

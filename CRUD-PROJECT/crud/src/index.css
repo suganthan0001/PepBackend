@@ -79,9 +79,6 @@ body{
 
 .movies{
     padding: 2%;
-    /* display: grid;
-    grid-template-columns: repeat(5,1fr);
-    row-gap: 2% !important; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -92,4 +89,10 @@ body{
 .movie-name{
     display: flex;
     align-items: center;
+}
+
+.yt-video{
+    height: 600px;
+    width: 90%;
+    margin: 0 auto;
 }

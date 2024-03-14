@@ -11,9 +11,9 @@ function MoviesGrid() {
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
+        // if (oldProgress === 100) {
+        //   return 0;
+        // }
         const diff = Math.random() * 10;
         return Math.min(oldProgress + diff, 100);
       });
@@ -34,13 +34,12 @@ function MoviesGrid() {
       console.log(response);
       setProgress(70);
       setData(response);
-      setProgress(99);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
       setTimeout(() => {
         setLoader(false);
-      },1000)
+      }, 900);
     }
   }
 
@@ -49,21 +48,21 @@ function MoviesGrid() {
   }, []);
 
   return (
-    <div className="movies">
+    <>
       {loader && (
         <Box sx={{ width: "100%" }}>
           <LinearProgress variant="determinate" value={progress} />
         </Box>
       )}
-      {data.map((movie, index) => (
-        <Movie
+      <div className="movies">
+        {data.map((movie, index) => (
+          <Movie
           key={index}
-          name={movie.name}
-          poster={movie.poster}
-          summary={movie.summary}
-        />
-      ))}
-    </div>
+            response={movie}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
