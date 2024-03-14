@@ -6,51 +6,48 @@ import AddIcon from "@mui/icons-material/Add";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import SuccessMessage from "./SuccessMessage";
+
+
+
+
 function EditMovie() {
   const { id } = useParams();
 
   const [movie, setMovie] = useState();
+  
+
+  async function get() {
+    try {
+      const movie1 = await fetch(
+        `https://65f16ba2034bdbecc762729a.mockapi.io/movie/${id}`
+      );
+      const res = await movie1.json();
+
+      setMovie(res);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    get();
+  }, []);
+
+  return (
+    <>
+        {movie != undefined ? <EditForm movie={movie}/>:"Loading..."}
+    {/* <SuccessMessage/> */}
+    </>
+  )
+}
+
+function EditForm({movie}) {
   const navigate = useNavigate();
 
-  const movieValidateSchema = yup.object({
-    name: yup.string().required(),
-    poster: yup.string().required().min(10).url(),
-    trailer: yup.string().required().min(10).url(),
-    rating: yup.number().required().min(0).max(10),
-    summary: yup.string().required().min(20),
-  });
-  
-  
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      poster: "",
-      trailer: "",
-      rating: "",
-      summary: "",
-    },
-    validationSchema: movieValidateSchema,
-    onSubmit: (newMovie) => {
-      updateMovie(newMovie);
-    },
-  });
-
-  // async function get() {
-  //   try {
-  //     const movie1 = await fetch(
-  //       `https://65f16ba2034bdbecc762729a.mockapi.io/movie/${id}`
-  //     );
-  //     const res = await movie1.json();
-
-  //     setMovie(res);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
-  async function updateMovie(movie){
+  async function updateMovie(movie,old){
     try{
-      const res = await fetch(`https://65f16ba2034bdbecc762729a.mockapi.io/movie/${id}`, {
+      const res = await fetch(`https://65f16ba2034bdbecc762729a.mockapi.io/movie/${old.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -64,14 +61,32 @@ function EditMovie() {
       console.log(e)
     }
   }
+  
 
-  useEffect(() => {
-    get();
-  }, []);
-
+  const movieValidateSchema = yup.object({
+    name: yup.string().required(),
+    poster: yup.string().required().min(10).url(),
+    trailer: yup.string().required().min(10).url(),
+    rating: yup.number().required().min(0).max(10),
+    summary: yup.string().required().min(20),
+  });
+  
+  
+  const formik = useFormik({
+    initialValues: {
+      name: movie.name,
+      poster: movie.poster,
+      trailer: movie.trailer,
+      rating: movie.rating,
+      summary: movie.summary,
+    },
+    validationSchema: movieValidateSchema,
+    onSubmit: (newMovie) => {
+      updateMovie(newMovie,movie);
+    },
+  });
   return (
-    <>
-      <form className="Addmovie addForm" onSubmit={formik.handleSubmit}>
+    <form className="Addmovie addForm" onSubmit={formik.handleSubmit}>
       <h1>Edit Movie</h1>
       <TextField
         id="outlined-basic"
@@ -152,14 +167,7 @@ function EditMovie() {
         UPDATE
       </Button>
     </form>
-    </>
   )
 }
-
-// function EditForm() {
-//   return (
-    
-//   );
-// }
 
 export default EditMovie;
