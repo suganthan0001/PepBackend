@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Movie from "./Movie";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import { SnackbarProvider, useSnackbar } from "notistack";
+import MyApp from "./SuccessMessage";
+import Button from "@mui/material/Button";
 
 function MoviesGrid() {
   const [data, setData] = useState([]);
@@ -56,12 +59,12 @@ function MoviesGrid() {
       )}
       <div className="movies">
         {data.map((movie, index) => (
-          <Movie
-          key={index}
-            response={movie}
-          />
+          <Movie key={index} response={movie} fetchData = {fetchData}/>
         ))}
       </div>
+      <SnackbarProvider maxSnack={3}>
+        <MyApp msg={"Signed in Successfully..."} />
+      </SnackbarProvider>
     </>
   );
 }

@@ -27,7 +27,7 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home mode={mode} setMode={setMode} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/portal" element={<Portal mode={mode} setMode={setMode}/>}>
           <Route path="add" element={<AddMovie />} />

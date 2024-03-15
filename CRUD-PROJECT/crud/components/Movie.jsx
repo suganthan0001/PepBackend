@@ -22,10 +22,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} timeout={500}/>;
+  return <Slide direction="up" ref={ref} {...props} timeout={300}/>;
 });
 
-function Movie({ response }) {
+function Movie({ response , fetchData}) {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
@@ -42,7 +42,7 @@ function Movie({ response }) {
       );
 
       console.log("DELETION SUCCESS");
-      navigate(`/portal/movies/`);
+      fetchData();
     } catch (e) {
       console.log(e);
     }
@@ -80,9 +80,6 @@ function Movie({ response }) {
               onClick={() => {
                 deleteMovie();
                 handleClose();
-                setTimeout(() => {
-                  window.location.reload();
-                }, 2000);
               }}
               style={{ color: "red" }}
             >
